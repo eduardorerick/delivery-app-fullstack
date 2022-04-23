@@ -20,12 +20,14 @@ export class CreateClientUseCase {
       throw new Error("Client already exists");
     }
     const hashPassword = await hash(password, 10);
-    
-    await prisma.client.create({
+
+    const client = await prisma.client.create({
       data: {
         username,
         password: hashPassword,
       },
     });
+
+    return client;
   }
 }
