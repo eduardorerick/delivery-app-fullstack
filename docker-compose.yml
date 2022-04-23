@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  database:
+    image: postgres
+    container_name: delivery_db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=deliveryApi
+    volumes:
+      - pgdata:/data/postgres
+
+  api:
+    build: ./api
+    container_name: delivery_api
+    restart: always
+    ports:
+      - 3333:3333
+    environment:
+      - DATABASE_URL=postgres://admin:admin@database/deliveryApi
+    volumes:
+      - ./api:/usr/api
+    links:
+      - database
+    depends_on:
+      - database
+
+volumes:
+  pgdata:
+    driver: local
