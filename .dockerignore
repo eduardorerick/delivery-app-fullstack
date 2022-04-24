@@ -1,6 +1,9 @@
 api/node_modules
 api/.git
 api/.vscode
+web/node_modules
+web/.git
+web/.vscode
 node_modules
 .git
 .vscode
