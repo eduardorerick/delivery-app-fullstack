@@ -1,13 +1,29 @@
 import { createTheme } from "@mui/material";
-import { green, purple } from "@mui/material/colors";
 
 export const globalTheme = createTheme({
+  components: {
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          fontFamily: "Inter, sans-serif",
+        },
+      },
+    },
+  },
   palette: {
+    text: {
+      primary: "#f5f5f5",
+    },
     primary: {
-      main: purple[500],
+      main: "#ae2d68",
+      dark: "#660f56",
     },
     secondary: {
-      main: green[500],
+      main: "#f5f5f5",
+      dark: "#660f56",
+    },
+    background: {
+      default: "#280659",
     },
   },
 });
