@@ -6,7 +6,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { getAuthLogin } from "../services/auth";
 
 export function Login() {
   return (
@@ -62,10 +61,7 @@ export function Login() {
               <Typography>
                 Ainda não tem acesso? Faça o seu cadastro!
               </Typography>
-              <Button
-                variant={"contained"}
-                onClick={() => getAuthLogin("edu", "123")}
-              >
+              <Button variant={"contained"}>
                 <Typography>Cadastrar</Typography>
               </Button>
             </Box>
