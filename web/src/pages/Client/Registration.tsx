@@ -15,8 +15,6 @@ export function ClientRegistration() {
 		resolver: clientPasswordYupResolver
 	});
 
-	console.log(errors)
-
 	async function handleClick(data: ClientRegistrationForm) {
 		try {
 			await getClientRegistration(data.username, data.password)
@@ -50,6 +48,9 @@ export function ClientRegistration() {
 								<TextField
 									{...register('username')}
 									fullWidth
+									{...!!errors.username && {
+										helperText: errors.username.message
+									}}
 									error={!!errors.username}
 									required
 									label={'Nome de usuário'}
@@ -57,6 +58,9 @@ export function ClientRegistration() {
 								<TextField
 									{...register('password')}
 									error={!!errors.password}
+									{...!!errors.password && {
+										helperText: errors.password.message
+									}}
 									required
 									fullWidth
 									inputProps={{ type: 'password' }}
@@ -65,6 +69,9 @@ export function ClientRegistration() {
 								<TextField
 									{...register('passwordConfirmation')}
 									error={!!errors.passwordConfirmation}
+									{...!!errors.passwordConfirmation && {
+										helperText: errors.passwordConfirmation.message
+									}}
 									required
 									fullWidth
 									inputProps={{ type: 'password' }}
