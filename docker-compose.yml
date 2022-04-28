@@ -29,18 +29,18 @@ services:
     depends_on:
       - database
 
-  web:
-    build: ./web
-    container_name: delivery_web
-    restart: always
-    ports:
-      - 3000:3000
-    volumes:
-      - ./web:/usr/web
-    links:
-      - api
-    depends_on:
-      - api
+  # web:
+  #   build: ./web
+  #   container_name: delivery_web
+  #   restart: always
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - ./web:/usr/web
+  #   links:
+  #     - api
+  #   depends_on:
+  #     - api
 
 volumes:
   pgdata:
