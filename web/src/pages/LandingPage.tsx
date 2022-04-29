@@ -1,4 +1,4 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Slide, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { AssetPath, RouterPath } from "../constants";
 
@@ -36,7 +36,7 @@ export function LandingPage() {
                 </Button>
                 <Button
                   variant="text"
-                  onClick={() => navigate("/login")}
+                  onClick={() => navigate(RouterPath.DELIVERY_MAN_LOGIN)}
                   sx={{ color: "primary.contrastText", textTransform: "none" }}
                 >
                   <Typography>Login como motorista</Typography>
@@ -61,17 +61,19 @@ export function LandingPage() {
               justifyContent: "center",
             }}
           >
-            <Box
-              sx={{
-                flex: 1,
-              }}
-            >
-              <img
-                style={{ width: "100%" }}
-                src={AssetPath.LANDING_PAGE_BIKE_DELIVERY}
-                alt="Woman in bike making a delivery"
-              />
-            </Box>
+            <Slide direction="right" in={true} timeout={1000}>
+              <Box
+                sx={{
+                  flex: 1,
+                }}
+              >
+                <img
+                  style={{ width: "100%" }}
+                  src={AssetPath.LANDING_PAGE_BIKE_DELIVERY}
+                  alt="Woman in bike making a delivery"
+                />
+              </Box>
+            </Slide>
             <Box sx={{ flex: 1, color: "primary.contrastText" }}>
               <Typography variant="h3">Delivery App</Typography>
               <Typography variant="body1">

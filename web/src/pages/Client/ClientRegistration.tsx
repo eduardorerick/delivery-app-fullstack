@@ -1,6 +1,6 @@
 import { Box, Button, Container, Grow, Paper, Stack, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { getClientRegistration } from '../../services/auth';
+import { getClientRegistration } from '../../services/client';
 import { clientPasswordYupResolver } from '../../validations';
 
 type ClientRegistrationForm = {
