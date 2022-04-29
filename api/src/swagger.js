@@ -13,4 +13,6 @@ const doc = {
 const outputFile = "./swagger-output.json";
 const endpointsFiles = ["./src/routes.ts"];
 
-swaggerAutogen(outputFile, endpointsFiles, doc);
+swaggerAutogen(outputFile, endpointsFiles, doc).then(() =>
+  require("./server.ts")
+);
