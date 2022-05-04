@@ -11,18 +11,26 @@ import {
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { RouterPath } from "../../constants/routes";
+import { useClientLogin } from "../../services";
 import { clientLoginYupResolver } from "../../validations";
+
+type ClientLogin = {
+  username: string;
+  password: string;
+};
 
 export function ClientLogin() {
   const navigate = useNavigate();
+  const clientLogin = useClientLogin();
 
-  const { control, register, handleSubmit } = useForm({
+  const { register, handleSubmit } = useForm<ClientLogin>({
     mode: "onChange",
     resolver: clientLoginYupResolver,
   });
 
-  function handleClick(data: any) {
-    console.log(data);
+  async function handleClick({ password, username }: ClientLogin) {
+    await clientLogin(username, password);
+    navigate(RouterPath.CLIENT_PORTAL);
   }
   return (
     <Container>
@@ -61,6 +69,7 @@ export function ClientLogin() {
                   label={"Username"}
                 />
                 <TextField
+                  {...register("password")}
                   fullWidth
                   inputProps={{ type: "password" }}
                   label={"Senha"}

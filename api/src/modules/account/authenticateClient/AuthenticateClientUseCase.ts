@@ -16,13 +16,13 @@ export class AuthenticateClientUseCase {
     });
 
     if (!client) {
-      throw new Error("Username or password invalid!");
+      throw new Error("Nome de usuário ou senha inválidos!");
     }
 
     const passwordMatch = await compare(password, client.password);
 
     if (!passwordMatch) {
-      throw new Error("Username or password invalid!");
+      throw new Error("Nome de usuário ou senha inválidos!");
     }
 
     const token = sign({ username }, process.env.HASH_CLIENT!, {

@@ -41,13 +41,13 @@ export function LandingPage() {
                 >
                   <Typography>Login como motorista</Typography>
                 </Button>
-                <Button
+                {/* <Button
                   variant="text"
                   onClick={() => navigate("/login")}
                   sx={{ color: "primary.contrastText", textTransform: "none" }}
                 >
                   <Typography>Login como restaurante</Typography>
-                </Button>
+                </Button> */}
               </Box>
             </Box>
           </Box>
