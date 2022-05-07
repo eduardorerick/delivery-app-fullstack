@@ -7,6 +7,7 @@ import { DeliveryManRegistration } from "../pages/DeliveryMan/DeliveryManRegistr
 import { LandingPage } from "../pages/LandingPage";
 import { ClientPortal } from "../pages/Client/ClientPortal/ClientPortal";
 import { NewDelivery } from "../pages/Client/ClientPortal/NewDelivery";
+import { ClientDeliveries } from "../pages/Client/ClientPortal/ClientDeliveries";
 
 export function Routes() {
   return (
@@ -19,7 +20,14 @@ export function Routes() {
           element={<ClientRegistration />}
         />
         <Route path={RouterPath.CLIENT_PORTAL} element={<ClientPortal />}>
-          <Route path={RouterPath.CLIENT_PORTAL_NEW_DELIVERY} element={<NewDelivery />} />
+          <Route
+            path={RouterPath.CLIENT_PORTAL_NEW_DELIVERY}
+            element={<NewDelivery />}
+          />
+          <Route
+            path={RouterPath.CLIENT_PORTAL_DELIVERIES}
+            element={<ClientDeliveries />}
+          />
         </Route>
         <Route
           path={RouterPath.DELIVERY_MAN_LOGIN}

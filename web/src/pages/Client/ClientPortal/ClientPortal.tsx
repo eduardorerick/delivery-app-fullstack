@@ -34,7 +34,7 @@ export function ClientPortal() {
                 </Button>
                 <Button
                   variant="text"
-                  onClick={() => navigate(RouterPath.DELIVERY_MAN_LOGIN)}
+                  onClick={() => navigate(RouterPath.CLIENT_PORTAL_DELIVERIES)}
                   sx={{ color: "primary.contrastText", textTransform: "none" }}
                 >
                   <Typography>Acompanhar pedidos</Typography>
