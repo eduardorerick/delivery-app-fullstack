@@ -16,13 +16,13 @@ export class AuthenticateDeliverymanUseCase {
     });
 
     if (!deliveryman) {
-      throw new Error("Username or password invalid!");
+      throw new Error("Usuário ou senha inválidos");
     }
 
     const passwordMatch = await compare(password, deliveryman.password);
 
     if (!passwordMatch) {
-      throw new Error("Username or password invalid!");
+      throw new Error("Usuário ou senha inválidos");
     }
 
     const token = sign({ username }, process.env.HASH_DELIVERYMAN!, {

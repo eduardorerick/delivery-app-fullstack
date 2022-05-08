@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { Check } from "@mui/icons-material";
 import { Delivery } from "../types/Delivery";
+import { useMemo } from "react";
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -72,19 +73,32 @@ function QontoStepIcon(props: StepIconProps) {
   );
 }
 
-function getStep(data: Delivery) {
+function getStep(data: Delivery) {}
 
-}
-
-export function DeliveryProgress() {
+export function DeliveryProgress({ delivery }: { delivery: Delivery }) {
   const steps = ["Pedido feito", "Saiu para a entrega", "Pedido finalizado"];
+  const { id_deliveryman, end_at } = delivery;
 
-
-  
+  const activeStep = useMemo(() => {
+    switch (true) {
+      case !!id_deliveryman && !!end_at:
+        return 3;
+      case !!id_deliveryman && !end_at:
+        return 2;
+      case !id_deliveryman && !end_at:
+        return 1;
+      default:
+        return 1;
+    }
+  }, [id_deliveryman, end_at]);
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Stepper activeStep={1} alternativeLabel connector={<QontoConnector />}>
+      <Stepper
+        activeStep={activeStep}
+        alternativeLabel
+        connector={<QontoConnector />}
+      >
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel StepIconComponent={QontoStepIcon}>{label}</StepLabel>

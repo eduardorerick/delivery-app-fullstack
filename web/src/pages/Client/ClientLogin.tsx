@@ -12,23 +12,19 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { RouterPath } from "../../constants/routes";
 import { useClientLogin } from "../../services";
+import { Login } from "../../types/Login";
 import { clientLoginYupResolver } from "../../validations";
-
-type ClientLogin = {
-  username: string;
-  password: string;
-};
 
 export function ClientLogin() {
   const navigate = useNavigate();
   const clientLogin = useClientLogin();
 
-  const { register, handleSubmit } = useForm<ClientLogin>({
+  const { register, handleSubmit } = useForm<Login>({
     mode: "onChange",
     resolver: clientLoginYupResolver,
   });
 
-  async function handleClick({ password, username }: ClientLogin) {
+  async function handleClick({ password, username }: Login) {
     await clientLogin(username, password);
     navigate(RouterPath.CLIENT_PORTAL);
   }

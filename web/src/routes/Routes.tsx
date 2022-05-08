@@ -8,6 +8,9 @@ import { LandingPage } from "../pages/LandingPage";
 import { ClientPortal } from "../pages/Client/ClientPortal/ClientPortal";
 import { NewDelivery } from "../pages/Client/ClientPortal/NewDelivery";
 import { ClientDeliveries } from "../pages/Client/ClientPortal/ClientDeliveries";
+import { DeliverymanPortal } from "../pages/DeliveryMan/DeliverymanPortal/DeliverymanPortal";
+import { DeliverymanAvailableDeliveries } from "../pages/DeliveryMan/DeliverymanPortal/DeliverymanAvailableDeliveries";
+import { DeliverymanDeliveries } from "../pages/DeliveryMan/DeliverymanPortal/DeliverymanDeliveries";
 
 export function Routes() {
   return (
@@ -37,6 +40,19 @@ export function Routes() {
           path={RouterPath.DELIVERY_MAN_REGISTRATION}
           element={<DeliveryManRegistration />}
         />
+        <Route
+          path={RouterPath.DELIVERY_MAN_PORTAL}
+          element={<DeliverymanPortal />}
+        >
+          <Route
+            path={RouterPath.DELIVERY_MAN_PORTAL_AVAILABLE_DELIVERIES}
+            element={<DeliverymanAvailableDeliveries />}
+          />
+          <Route
+            path={RouterPath.DELIVERY_MAN_PORTAL_DELIVERIES}
+            element={<DeliverymanDeliveries />}
+          />
+        </Route>
       </DomRoutes>
     </BrowserRouter>
   );

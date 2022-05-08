@@ -2,7 +2,7 @@ import { prisma } from "../../../database/prismaClient";
 
 export class FindAllDeliveriesDeliverymanUseCase {
   async execute(id_deliveryman: string) {
-    const deliveries = await prisma.deliveryman.findMany({
+    const deliveryman = await prisma.deliveryman.findUnique({
       where: {
         id: id_deliveryman,
       },
@@ -12,6 +12,6 @@ export class FindAllDeliveriesDeliverymanUseCase {
         deliveries: true,
       },
     });
-    return deliveries;
+    return deliveryman;
   }
 }

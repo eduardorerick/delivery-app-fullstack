@@ -9,7 +9,9 @@ import {
   Typography,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { getDeliveryManRegistration } from "../../services";
+import { useNavigate } from "react-router-dom";
+import { RouterPath } from "../../constants";
+import { useDeliveryManRegistration } from "../../services";
 import { clientPasswordYupResolver } from "../../validations";
 
 type DeliveryManRegistrationForm = {
@@ -19,6 +21,8 @@ type DeliveryManRegistrationForm = {
 };
 
 export function DeliveryManRegistration() {
+  const navigate = useNavigate();
+  const createDeliveryman = useDeliveryManRegistration();
   const {
     control,
     register,
@@ -31,7 +35,8 @@ export function DeliveryManRegistration() {
 
   async function handleClick(data: DeliveryManRegistrationForm) {
     try {
-      await getDeliveryManRegistration(data.username, data.password);
+      await createDeliveryman(data.username, data.password);
+      navigate(RouterPath.LANDING_PAGE);
     } catch (err) {
       console.log(err);
     }

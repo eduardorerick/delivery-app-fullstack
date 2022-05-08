@@ -10,21 +10,50 @@ import {
   Grid,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { DeliveryProgress } from "../../../components/DeliveryProgress";
+import { RouterPath } from "../../../constants";
+import { useDeliverymanDeliveries } from "../../../services";
+import { useCreateDelivery } from "../../../services/delivery";
 import { Delivery } from "../../../types/Delivery";
-import { useClientDeliveries } from "../../../services";
+import { clientNewDeliveryResolver } from "../../../validations";
 
-export function ClientDeliveries() {
-  const getDeliveries = useClientDeliveries();
+type NewDeliveryForm = {
+  item_name: string;
+};
+
+export function DeliverymanDeliveries() {
+  const createDelivery = useCreateDelivery();
+  const deliverymanDeliveries = useDeliverymanDeliveries();
   const [deliveries, setDeliveries] = useState([] as Delivery[]);
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<NewDeliveryForm>({
+    mode: "onChange",
+    resolver: clientNewDeliveryResolver,
+  });
 
   useEffect(() => {
     async function getData() {
-      const response = await getDeliveries();
+      const response = await deliverymanDeliveries();
       setDeliveries(response);
     }
     getData();
   }, []);
+
+  async function handleClick(data: NewDeliveryForm) {
+    try {
+      const response = await createDelivery(data.item_name);
+      navigate(RouterPath.CLIENT_PORTAL_DELIVERIES);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <Container>
@@ -61,6 +90,7 @@ export function ClientDeliveries() {
               >
                 <Typography>{delivery.item_name}</Typography>
                 <Typography>22-10-2022</Typography>
+                <Button variant="contained">Encerrar pedido</Button>
                 <DeliveryProgress delivery={delivery}/>
               </Paper>
             </Grid>

@@ -11,18 +11,23 @@ import {
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { RouterPath } from "../../constants/routes";
+import { useDeliveryManLogin } from "../../services";
+import { Login } from "../../types/Login";
 import { clientLoginYupResolver } from "../../validations";
 
 export function DeliveryManLogin() {
   const navigate = useNavigate();
+  const deliverymanLogin = useDeliveryManLogin();
 
-  const { control, register, handleSubmit } = useForm({
+  const { control, register, handleSubmit } = useForm<Login>({
     mode: "onChange",
     resolver: clientLoginYupResolver,
   });
 
-  function handleClick(data: any) {
-    console.log(data);
+  async function handleClick({ password, username }: Login) {
+    console.log("clicou");
+    await deliverymanLogin(username, password);
+    navigate(RouterPath.DELIVERY_MAN_PORTAL);
   }
   return (
     <Container>
@@ -58,9 +63,10 @@ export function DeliveryManLogin() {
                 <TextField
                   {...register("username")}
                   fullWidth
-                  label={"Username"}
+                  label={"Nome de usuário"}
                 />
                 <TextField
+                  {...register("password")}
                   fullWidth
                   inputProps={{ type: "password" }}
                   label={"Senha"}
@@ -86,7 +92,7 @@ export function DeliveryManLogin() {
                   Ainda não tem acesso? Faça o seu cadastro!
                 </Typography>
                 <Button
-                  onClick={() => navigate(RouterPath.CLIENT_REGISTRATION)}
+                  onClick={() => navigate(RouterPath.DELIVERY_MAN_REGISTRATION)}
                   variant={"contained"}
                 >
                   <Typography>Cadastrar</Typography>

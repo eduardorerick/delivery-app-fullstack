@@ -13,18 +13,31 @@ import { useEffect, useState } from "react";
 import { DeliveryProgress } from "../../../components/DeliveryProgress";
 import { Delivery } from "../../../types/Delivery";
 import { useClientDeliveries } from "../../../services";
+import {
+  useAvailableDeliveries,
+  useUpdateDeliveryman,
+} from "../../../services/delivery";
+import { RouterPath } from "../../../constants";
+import { useNavigate } from "react-router-dom";
 
-export function ClientDeliveries() {
-  const getDeliveries = useClientDeliveries();
+export function DeliverymanAvailableDeliveries() {
+  const navigate = useNavigate()
+  const getAvailableDeliveries = useAvailableDeliveries();
+  const updateDelivery = useUpdateDeliveryman();
   const [deliveries, setDeliveries] = useState([] as Delivery[]);
 
   useEffect(() => {
     async function getData() {
-      const response = await getDeliveries();
+      const response = await getAvailableDeliveries();
       setDeliveries(response);
     }
     getData();
   }, []);
+
+  async function pickDelivery(id: string) {
+    await updateDelivery(id);
+    navigate(RouterPath.DELIVERY_MAN_PORTAL_DELIVERIES);
+  }
 
   return (
     <Container>
@@ -41,7 +54,7 @@ export function ClientDeliveries() {
                   justifyContent: "center",
                 }}
               >
-                Ainda não tem pedidos! Faça seu primeiro pedido
+                Ainda não tem pedidos! Aguarde para mais pedidos.
               </Box>
             </Grid>
           )}
@@ -60,8 +73,12 @@ export function ClientDeliveries() {
                 }}
               >
                 <Typography>{delivery.item_name}</Typography>
-                <Typography>22-10-2022</Typography>
-                <DeliveryProgress delivery={delivery}/>
+                <Button
+                  onClick={() => pickDelivery(delivery.id)}
+                  variant="contained"
+                >
+                  <Typography>aceitar entrega</Typography>
+                </Button>
               </Paper>
             </Grid>
           ))}
