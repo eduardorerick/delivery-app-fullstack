@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { RouterPath } from "../../../constants";
+import { useCreateDelivery } from "../../../services/delivery";
 import { clientNewDeliveryResolver } from "../../../validations";
 
 type NewDeliveryForm = {
@@ -17,17 +19,26 @@ type NewDeliveryForm = {
 };
 
 export function NewDelivery() {
+  const createDelivery = useCreateDelivery();
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<NewDeliveryForm>({
     mode: "onChange",
     resolver: clientNewDeliveryResolver,
   });
 
-  async function handleClick(data: NewDeliveryForm) {}
+  async function handleClick(data: NewDeliveryForm) {
+    try {
+      const response = await createDelivery(data.item_name);
+      navigate(RouterPath.CLIENT_PORTAL_DELIVERIES);  
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <Container>
       <Grow in={true} timeout={1000}>

@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { useSnackbar } from "notistack";
-import { Delivery } from "../entities/Delivery";
+import { Delivery } from "../types/Delivery";
 import { api } from "../utils/api";
 
 export function useClientLogin() {

@@ -5,6 +5,10 @@ import { AssetPath, RouterPath } from "../../../constants";
 export function ClientPortal() {
   const navigate = useNavigate();
 
+  function handleLogout() {
+    localStorage.clear();
+    navigate(RouterPath.LANDING_PAGE);
+  }
   return (
     <Box
       sx={{
@@ -39,13 +43,13 @@ export function ClientPortal() {
                 >
                   <Typography>Acompanhar pedidos</Typography>
                 </Button>
-                {/* <Button
-                    variant="text"
-                    onClick={() => navigate("/login")}
-                    sx={{ color: "primary.contrastText", textTransform: "none" }}
-                  >
-                    <Typography>Login como restaurante</Typography>
-                  </Button> */}
+                <Button
+                  variant="text"
+                  onClick={handleLogout}
+                  sx={{ color: "primary.contrastText", textTransform: "none" }}
+                >
+                  <Typography>Logout</Typography>
+                </Button>
               </Box>
             </Box>
           </Box>

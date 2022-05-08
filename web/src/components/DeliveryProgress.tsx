@@ -9,7 +9,7 @@ import {
   StepIconProps,
 } from "@mui/material";
 import { Check } from "@mui/icons-material";
-import { Delivery } from "../entities/Delivery";
+import { Delivery } from "../types/Delivery";
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
